@@ -14,4 +14,6 @@ $regexAddress = '/^[A-Za-z0-9àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêî�
 $regexPhoneNumber = '/^[0-9]+$/';
 // regex pour l'URL
 $regexURL = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
+// regex pour l'heure
+$regexHour = '/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/';
 ?>

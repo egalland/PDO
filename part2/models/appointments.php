@@ -13,10 +13,10 @@ class Appointments extends Database {
     }
 
     public function addAppointment(){
-        $addAppointment = $this->db->prepare('INSERT INTO `appointments` (`dateHour`, `idPatients`) VALUES (:dateHour, :idPatients)');
-        $addAppointment->bindValue(':dateHour', $this->dateHour, PDO::PARAM_STR);
-        $addAppointment->bindValue(':idPatients', $this->idPatients, PDO::PARAM_INT);
-        return $addAppointment->execute();
+        $appointment = $this->_db_->prepare('INSERT INTO `appointments` (`dateHour`, `idPatients`) VALUES (:dateHour, :idPatients)');
+        $appointment->bindValue(':dateHour', $this->dateHour, PDO::PARAM_STR);
+        $appointment->bindValue(':idPatients', $this->idPatients, PDO::PARAM_INT);
+        return $appointment->execute();
     }
 
     public function checkIfAppointmentExists() {

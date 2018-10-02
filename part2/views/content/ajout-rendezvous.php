@@ -1,9 +1,9 @@
 <?php
 /* * ****************************IMPORT***************************************** */
-//model appointments
-require '../../models/appointments.php';
 //model patients
 require '../../models/patients.php';
+//model appointments
+require '../../models/appointments.php';
 //regex
 require '../../controllers/regex.php';
 // Controlleur de la page
@@ -29,7 +29,7 @@ include '../header.php';
         <div class="col-md-6">
             <div class="form-group row">
                 <label for="patientName" class="col-md-12 col-form-label badge-light text-center mt-4">Sélectionner un patient :</label>
-                <select name="idPatient" id="idPatient" class="form-control col m-2">
+                <select name="idPatients" id="idPatients" class="form-control col m-2">
                     <option value="0" selected disabled>Choix du patient</option>
                     <?php foreach ($patientsList as $patient) { ?>
                     <option value="<?= $patient->id ?>"><?= $patient->lastname . ' ' . $patient->firstname . ' ' . $patient->birthDate . ' ' . $patient->phone . ' ' . $patient->mail; ?></option>
@@ -39,8 +39,7 @@ include '../header.php';
         </div>
     </div>
     <div class="row pt-2">
-        <input type="submit" name="createAppointment" class="col btn btn-dark" id="createAppointment" value="Créer le rendez-vous"
-            disabled="disabled" />
+        <input type="submit" name="createAppointment" class="col btn btn-dark" id="createAppointment" value="Créer le rendez-vous" />
     </div>
 </form>
 <script src="../../assets/js/modifyPatient.js"></script>
