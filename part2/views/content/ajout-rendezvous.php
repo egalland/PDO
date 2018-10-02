@@ -11,7 +11,7 @@ require '../../controllers/ajout-rendezvousController.php';
 // Controlleur du header
 include '../../controllers/headerController.php';
 // Titre de la page
-$pageTitle = 1;
+$pageTitle = 3;
 // Header
 include '../header.php';
 /* * *************************************************************************** */

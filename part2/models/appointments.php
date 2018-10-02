@@ -40,6 +40,14 @@ class Appointments extends Database {
         return $result;
     }
 
+    public function getAppointments() {
+        $result = array();
+        $appointment = $this->_db_->query('SELECT DATE_FORMAT(`appointments`.`dateHour`, "%d/%m/%Y %H:%i:%s") as `dateHour`, `patients`.`lastname`, `patients`.`firstname`, DATE_FORMAT(`patients`.`birthDate`, "%d/%m/%Y") as `birthDate`, `patients`.`phone`, `patients`.`mail` FROM `appointments` LEFT JOIN `patients` ON `appointments`.`idPatients` = `patients`.`id`');
+        if (is_object($appointment)) {
+            $result = $appointment->fetchAll(PDO::FETCH_OBJ);
+        }
+        return $result;
+    }
     public function __destruct() {
         $this->_db_ = NULL;
     }
