@@ -65,6 +65,7 @@ if(isset($_POST['createAppointment'])){
             $formError['datetime'] = 'La date du rendez-vous ne peut pas être inférieure à la date actuelle';
         }
     }
+    
     if(count($formError) == 0){
         $checkIfAppointmentExists = $appointment->checkIfAppointmentExists();
         if(count($checkIfAppointmentExists) == 0){

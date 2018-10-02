@@ -25,6 +25,7 @@ include '../header.php';
             <th>Date de naissance</th>
             <th>Téléphone</th>
             <th>Email</th>
+            <th>Modifier</th>
         </tr>
     </thead>
     <tbody>
@@ -36,6 +37,7 @@ include '../header.php';
                 <td><?= $appointment->birthDate; ?></td>
                 <td><?= $appointment->phone; ?></td>
                 <td><?= $appointment->mail; ?></td>
+                <td><a href="rdv/<?= $appointment->id; ?>.html">Modifier le rendez-vous</td>
             </tr>
         <?php } ?>
     </tbody>

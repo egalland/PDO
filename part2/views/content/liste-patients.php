@@ -32,7 +32,7 @@ include '../header.php';
                 <td><?= $patient->birthDate; ?></td>
                 <td><?= $patient->phone; ?></td>
                 <td><?= $patient->mail; ?></td>
-                <td><a href="<?= $patient->id; ?>.html">Voir la fiche du patient</a></td>
+                <td><a href="profil/<?= $patient->id; ?>.html">Voir la fiche du patient</a></td>
             </tr>
         <?php } ?>
     </tbody>

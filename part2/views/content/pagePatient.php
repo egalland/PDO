@@ -77,8 +77,8 @@ include '../header.php';
     </div>
 </form>
 <?php } ?>
-<a href="liste-patients.php" class="col-md-2 btn btn-dark">Retour à la liste</a>
-<script src="../../assets/js/modifyPatient.js"></script>
+<a href="../liste-patients.php" class="col-md-2 btn btn-dark">Retour à la liste</a>
+<script src="../../../assets/js/modifyPatient.js"></script>
 <?php
 /* * ****************************IMPORT***************************************** */
 // footer

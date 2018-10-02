@@ -42,12 +42,23 @@ class Appointments extends Database {
 
     public function getAppointments() {
         $result = array();
-        $appointment = $this->_db_->query('SELECT DATE_FORMAT(`appointments`.`dateHour`, "%d/%m/%Y %H:%i:%s") as `dateHour`, `patients`.`lastname`, `patients`.`firstname`, DATE_FORMAT(`patients`.`birthDate`, "%d/%m/%Y") as `birthDate`, `patients`.`phone`, `patients`.`mail` FROM `appointments` LEFT JOIN `patients` ON `appointments`.`idPatients` = `patients`.`id`');
+        $appointment = $this->_db_->query('SELECT `appointments`.`id`, DATE_FORMAT(`appointments`.`dateHour`, "%d/%m/%Y %H:%i:%s") as `dateHour`, `patients`.`lastname`, `patients`.`firstname`, DATE_FORMAT(`patients`.`birthDate`, "%d/%m/%Y") as `birthDate`, `patients`.`phone`, `patients`.`mail` FROM `appointments` LEFT JOIN `patients` ON `appointments`.`idPatients` = `patients`.`id`');
         if (is_object($appointment)) {
             $result = $appointment->fetchAll(PDO::FETCH_OBJ);
         }
         return $result;
     }
+
+    public function getOneAppointment() {
+        $result = array();
+        $appointment = $this->_db_->prepare('SELECT `appointments`.`id`, `appointments`.`idPatients`, DATE_FORMAT(`appointments`.`dateHour`, "%d/%m/%Y %H:%i:%s") as `dateHour`, `patients`.`lastname`, `patients`.`firstname`, DATE_FORMAT(`patients`.`birthDate`, "%d/%m/%Y") as `birthDate`, `patients`.`phone`, `patients`.`mail` FROM `appointments` LEFT JOIN `patients` ON `appointments`.`idPatients` = `patients`.`id` WHERE `appointments`.`id` = :id');
+        $appointment->bindValue(':id', $this->id, PDO::PARAM_INT);
+        if ($appointment->execute()) {
+            $result = $appointment->fetch();
+        }
+        return $result;
+    }
+
     public function __destruct() {
         $this->_db_ = NULL;
     }
