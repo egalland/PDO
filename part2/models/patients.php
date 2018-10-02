@@ -17,7 +17,7 @@ class Patients extends Database {
 
     public function checkIfPatientExist() {
         $result = array();
-        $patient = $this->_db_->prepare('SELECT * FROM `patients` WHERE `lastname` = :lastname AND `firstname` = :firstname AND `birthDate` = :birthDate AND `phone` = :phoneNumber AND `mail` = :mail');
+        $patient = $this->_db_->prepare('SELECT COUNT(`id`) AS `count` FROM `patients` WHERE `lastname` = :lastname AND `firstname` = :firstname AND `birthDate` = :birthDate AND `phone` = :phoneNumber AND `mail` = :mail');
         // :bidule = marqueur nominatif
         $patient->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
         $patient->bindValue(':firstname', $this->firstname, PDO::PARAM_STR);
@@ -25,7 +25,7 @@ class Patients extends Database {
         $patient->bindValue(':phoneNumber', $this->phone, PDO::PARAM_STR);
         $patient->bindValue(':mail', $this->mail, PDO::PARAM_STR);
         if ($patient->execute()) {
-            $result = $patient->fetchAll(PDO::FETCH_OBJ);
+            $result = $patient->fetch(PDO::FETCH_OBJ);
         }
         return $result;
     }
@@ -54,7 +54,7 @@ class Patients extends Database {
         $patient = $this->_db_->prepare('SELECT `id`, `lastname`, `firstname`, `birthDate`, `phone`, `mail` FROM `patients` WHERE `id` = :id');
         $patient->bindValue(':id', $this->id, PDO::PARAM_INT);
         if ($patient->execute()) {
-            $result = $patient->fetchAll(PDO::FETCH_OBJ);
+            $result = $patient->fetch(PDO::FETCH_OBJ);
         }
         return $result;
     }

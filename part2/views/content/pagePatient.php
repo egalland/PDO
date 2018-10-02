@@ -15,12 +15,11 @@ include '../header.php';
 /* * *************************************************************************** */
 ?>
 <?php if($modifyChecked != null){?><p class="alert alert-warning"><?= $modifyChecked; ?></p><?php } ?>
-<?php foreach ($onePatient as $patient) { ?>
-<form class="py-4" action="<?= $patient->id; ?>.html" method="POST">
+<form class="py-4" action="<?= $onePatient->id; ?>.html" method="POST">
     <div class="form-group row">
         <label for="lastname" class="col-4 col-form-label badge-light text-center">Modifier le nom : </label>
         <div class="col-8">
-            <input class="form-control" value="<?= $patient->lastname; ?>" placeholder="Nom" id="lastname" name="lastname" maxlength="25" type="text" />
+            <input class="form-control" value="<?= $onePatient->lastname; ?>" placeholder="Nom" id="lastname" name="lastname" maxlength="25" type="text" />
         </div>
     </div>
     <?php if (!empty($formError['lastname'])) { ?>
@@ -31,7 +30,7 @@ include '../header.php';
     <div class="form-group row">
         <label for="firstname" class="col-4 col-form-label badge-light text-center">Modifier le prénom : </label>
         <div class="col-8">
-            <input class="form-control" value="<?= $patient->firstname; ?>" placeholder="Prénom" id="firstname" name="firstname" maxlength="25" type="text" />
+            <input class="form-control" value="<?= $onePatient->firstname; ?>" placeholder="Prénom" id="firstname" name="firstname" maxlength="25" type="text" />
         </div>
     </div>
     <?php if (!empty($formError['firstname'])) { ?>
@@ -42,7 +41,7 @@ include '../header.php';
     <div class="form-group row">
         <label for="birthDate" class="col-4 col-form-label badge-light text-center">Modifier la date de naissance : </label>
         <div class="col-8">
-            <input class="form-control" value="<?= $patient->birthDate; ?>" id="birthDate" name="birthDate" maxlength="25" type="date" />
+            <input class="form-control" value="<?= $onePatient->birthDate; ?>" id="birthDate" name="birthDate" maxlength="25" type="date" />
         </div>
     </div>
     <?php if (!empty($formError['birthDate'])) { ?>
@@ -53,7 +52,7 @@ include '../header.php';
     <div class="form-group row">
         <label for="phone" class="col-4 col-form-label badge-light text-center">Modifier le téléphone : </label>
         <div class="col-8">
-            <input class="form-control" value="<?= $patient->phone; ?>" placeholder="0000000000" id="phoneNumber" name="phoneNumber" maxlength="25" type="text" />
+            <input class="form-control" value="<?= $onePatient->phone; ?>" placeholder="0000000000" id="phoneNumber" name="phoneNumber" maxlength="25" type="text" />
         </div>
     </div>
     <?php if (!empty($formError['phoneNumber'])) { ?>
@@ -64,7 +63,7 @@ include '../header.php';
     <div class="form-group row">    
         <label for="mail" class="col-4 col-form-label badge-light text-center">Modifier l'email : </label>
         <div class="col-8">
-            <input class="form-control" value="<?= $patient->mail; ?>" placeholder="email@email.com" id="mail" name="mail" maxlength="100" type="mail" />
+            <input class="form-control" value="<?= $onePatient->mail; ?>" placeholder="email@email.com" id="mail" name="mail" maxlength="100" type="mail" />
         </div>
     </div>
     <?php if (!empty($formError['mail'])) { ?>
@@ -76,7 +75,6 @@ include '../header.php';
         <input type="submit" name="modifyPatient" class="col btn btn-dark" id="modifyPatient" value="Modifier le patient" disabled="disabled" />
     </div>
 </form>
-<?php } ?>
 <a href="../liste-patients.php" class="col-md-2 btn btn-dark">Retour à la liste</a>
 <script src="../../../assets/js/modifyPatient.js"></script>
 <?php

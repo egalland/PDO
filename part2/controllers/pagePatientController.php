@@ -1,7 +1,6 @@
 <?php
 
 $formError = [];
-$testPatient = [];
 $modifyChecked = null;
 
 $patient = new Patients();
@@ -97,8 +96,8 @@ if (isset($_POST['modifyPatient'])) {
         }
     }
     if (sizeof($formError) == 0) {
-        $testPatient = $patient->checkIfPatientExist();
-        if (count($testPatient) < 1) {
+        $checkIfPatientExist = $patient->checkIfPatientExist();
+        if ($checkIfPatientExist->count == 0) {
             $addPatient = $patient->modifyPatient();
             $modifyChecked = 'Le patient a bien été modifié';
         }else{
