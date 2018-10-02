@@ -24,7 +24,6 @@ include '../header.php';
                 <label for="dateAppointment" class="col-md-12 col-form-label badge-light text-center mt-4">La date du rendez vous :</label>
                 <input class="form-control col m-2" id="dateAppointment" name="dateAppointment" type="date" value="2008-10-10" />
                 <input class="form-control col m-2" id="hourAppointment" name="hourAppointment" type="time" value="10:20" />
-                
             </div>
         </div>
         <div class="col-md-6">
@@ -33,7 +32,7 @@ include '../header.php';
                 <select name="idPatients" id="idPatients" class="form-control col m-2">
                     <option value="0" selected disabled>Choix du patient</option>
                     <?php foreach ($patientsList as $patient) { ?>
-                    <option value="<?= $patient->id ?>" <?= $patient->id == $appointment->idPatients? 'selected': '' ?>> <?= $patient->lastname . ' ' . $patient->firstname . ' ' . $patient->birthDate . ' ' . $patient->phone . ' ' . $patient->mail; ?></option>
+                    <option value="<?= $patient->id ?>" <?= $patient->id == $oneAppointment->idPatients? 'selected': '' ?>> <?= $patient->lastname . ' ' . $patient->firstname . ' ' . $patient->birthDate . ' ' . $patient->phone . ' ' . $patient->mail; ?></option>
                     <?php } ?>
                 </select>
             </div>

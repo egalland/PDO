@@ -50,9 +50,9 @@ if(isset($_POST['modifyAppointment'])){
 
     if(count($formError) == 0){
         $checkIfAppointmentExists = $appointment->checkIfAppointmentExists();
-        if(count($checkIfAppointmentExists) == 0){
+        if($checkIfAppointmentExists->count == 0){
             $checkIfAppointmentIsAvailable = $appointment->checkIfAppointmentIsAvailable();
-            if(count($checkIfAppointmentIsAvailable) == 0){
+            if($checkIfAppointmentIsAvailable->count == 0){
                 $modifyAppointment = $appointment->modifyAppointment();
             }
         }

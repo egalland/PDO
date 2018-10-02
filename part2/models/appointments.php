@@ -21,21 +21,21 @@ class Appointments extends Database {
 
     public function checkIfAppointmentExists() {
         $result = array();
-        $checkAppointment = $this->_db_->prepare('SELECT * FROM `appointments` WHERE `dateHour` = :dateHour AND `idPatients` = :idPatients');
+        $checkAppointment = $this->_db_->prepare('SELECT COUNT(`id`) as `count` FROM `appointments` WHERE `dateHour` = :dateHour AND `idPatients` = :idPatients');
         $checkAppointment->bindValue(':dateHour', $this->dateHour, PDO::PARAM_STR);
         $checkAppointment->bindValue(':idPatients', $this->idPatients, PDO::PARAM_INT);
         if ($checkAppointment->execute()) {
-            $result = $checkAppointment->fetchAll(PDO::FETCH_OBJ);
+            $result = $checkAppointment->fetch(PDO::FETCH_OBJ);
         }
         return $result;
     }
 
     public function checkIfAppointmentIsAvailable() {
         $result = array();
-        $checkAppointment = $this->_db_->prepare('SELECT * FROM `appointments` WHERE `dateHour` = :dateHour');
+        $checkAppointment = $this->_db_->prepare('SELECT COUNT(`id`) as `count` FROM `appointments` WHERE `dateHour` = :dateHour');
         $checkAppointment->bindValue(':dateHour', $this->dateHour, PDO::PARAM_STR);
         if ($checkAppointment->execute()) {
-            $result = $checkAppointment->fetchAll(PDO::FETCH_OBJ);
+            $result = $checkAppointment->fetch(PDO::FETCH_OBJ);
         }
         return $result;
     }
@@ -54,7 +54,7 @@ class Appointments extends Database {
         $appointment = $this->_db_->prepare('SELECT `appointments`.`id`, `appointments`.`idPatients`, DATE_FORMAT(`appointments`.`dateHour`, "%d/%m/%Y %H:%i:%s") as `dateHour`, `patients`.`lastname`, `patients`.`firstname`, DATE_FORMAT(`patients`.`birthDate`, "%d/%m/%Y") as `birthDate`, `patients`.`phone`, `patients`.`mail` FROM `appointments` LEFT JOIN `patients` ON `appointments`.`idPatients` = `patients`.`id` WHERE `appointments`.`id` = :id');
         $appointment->bindValue(':id', $this->id, PDO::PARAM_INT);
         if ($appointment->execute()) {
-            $result = $appointment->fetch();
+            $result = $appointment->fetch(PDO::FETCH_OBJ);
         }
         return $result;
     }
