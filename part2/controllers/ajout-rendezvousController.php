@@ -22,7 +22,7 @@ if(isset($_POST['createAppointment'])){
         if($id != 0){
             if(is_numeric($id)){
                 $testIdExist = $patient->getOnePatient();
-                if (count($testIdExist) == 1) {
+                if ($testIdExist->count == 1) {
                     $idPatients = $id;
                 }else{
                     $formError['idPatients'] = 'Ce n\'est pas un patient existant';

@@ -51,7 +51,7 @@ class Patients extends Database {
 
     public function getOnePatient() {
         $result = array();
-        $patient = $this->_db_->prepare('SELECT `id`, `lastname`, `firstname`, `birthDate`, `phone`, `mail` FROM `patients` WHERE `id` = :id');
+        $patient = $this->_db_->prepare('SELECT `id`, COUNT(`id`) AS `count`, `lastname`, `firstname`, `birthDate`, `phone`, `mail` FROM `patients` WHERE `id` = :id');
         $patient->bindValue(':id', $this->id, PDO::PARAM_INT);
         if ($patient->execute()) {
             $result = $patient->fetch(PDO::FETCH_OBJ);

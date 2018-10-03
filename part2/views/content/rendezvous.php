@@ -18,12 +18,13 @@ include '../header.php';
 ?>
 <?php if (!empty($formError['dateHourAppointment'])) { ?><p class="alert alert-danger">/!\<?= $formError['dateHourAppointment']; ?></p><?php } ?>
 <form class="py-4" action="<?= $appointment->id; ?>.html" method="POST">
+<p><?= implode(' ', $formError); ?></p>
     <div class="row">
         <div class="col-md-6">
             <div class="form-group row">
                 <label for="dateAppointment" class="col-md-12 col-form-label badge-light text-center mt-4">La date du rendez vous :</label>
-                <input class="form-control col m-2" id="dateAppointment" name="dateAppointment" type="date" value="2008-10-10" />
-                <input class="form-control col m-2" id="hourAppointment" name="hourAppointment" type="time" value="10:20" />
+                <input class="form-control col m-2" id="dateAppointment" name="dateAppointment" type="date" value="<?= $oneAppointment->date; ?>" />
+                <input class="form-control col m-2" id="hourAppointment" name="hourAppointment" type="time" value="<?= $oneAppointment->hour; ?>" />
             </div>
         </div>
         <div class="col-md-6">
@@ -39,7 +40,7 @@ include '../header.php';
         </div>
     </div>
     <div class="row pt-2">
-        <input type="submit" name="createAppointment" class="col btn btn-dark" id="createAppointment" value="Créer le rendez-vous" />
+        <input type="submit" name="modifyAppointment" class="col btn btn-dark" id="modifyAppointment" value="Modifier le rendez-vous" />
     </div>
 </form>
 <script src="../../../assets/js/modifyPatient.js"></script>

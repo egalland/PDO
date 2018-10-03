@@ -12,8 +12,12 @@ if(isset($_GET['id'])){
 $patient = new Patients();
 $patientsList = $patient->getPatients();
 
+$idPatients = &$appointment->idPatients;
 $dateHour = &$appointment->dateHour;
+$id = &$patient->id;
 
+$date = null;
+$hour = null;
 
 if(isset($_POST['modifyAppointment'])){
 
@@ -48,14 +52,38 @@ if(isset($_POST['modifyAppointment'])){
         }
     }
 
+    if (isset($_POST['idPatients'])) {
+        $id = htmlspecialchars($_POST['idPatients']);
+        if($id != 0){
+            if(is_numeric($id)){
+                $testIdExist = $patient->getOnePatient();
+                if ($testIdExist->count == 1) {
+                    $idPatients = $id;
+                }else{
+                    $formError['idPatients'] = 'Ce n\'est pas un patient existant';
+                }
+            }else{
+                $formError['idPatients'] = 'La valeur envoyé n\'est pas bonne';
+            }
+        }else{
+            $formError['idPatients'] = 'Veuillez selectionner un patient';
+        }
+    }
+
     if(count($formError) == 0){
         $checkIfAppointmentExists = $appointment->checkIfAppointmentExists();
         if($checkIfAppointmentExists->count == 0){
             $checkIfAppointmentIsAvailable = $appointment->checkIfAppointmentIsAvailable();
             if($checkIfAppointmentIsAvailable->count == 0){
                 $modifyAppointment = $appointment->modifyAppointment();
+            }else{
+                $formError['modify'] = 'uu';
             }
+        }else{
+            $formError['modify'] = 'aaa';
         }
+    }else{
+        $formError['modify'] = 'ooo';
     }
 }
 $oneAppointment = $appointment->getOneAppointment();
