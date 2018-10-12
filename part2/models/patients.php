@@ -15,7 +15,7 @@ class Patients extends Database {
         parent::__construct();
     }
 
-    public function checkIfPatientExist() {
+        public function checkIfPatientExist() {
         $result = array();
         $patient = $this->_db_->prepare('SELECT COUNT(`id`) AS `count` FROM `patients` WHERE `lastname` = :lastname AND `firstname` = :firstname AND `birthDate` = :birthDate AND `phone` = :phoneNumber AND `mail` = :mail');
         // :bidule = marqueur nominatif
@@ -68,6 +68,16 @@ class Patients extends Database {
         $patient->bindValue(':phoneNumber', $this->phone, PDO::PARAM_STR);
         $patient->bindValue(':mail', $this->mail, PDO::PARAM_STR);
         return $patient->execute();
+    }
+
+    public function getAppointmentsForPatient() {
+        $result = array();
+        $appointment = $this->_db_->prepare('SELECT DATE_FORMAT(`appointments`.`dateHour`, "%d/%m/%Y %H:%i") as `dateHour` FROM `appointments` INNER JOIN `patients` ON `appointments`.`idPatients` = `patients`.`id` WHERE `appointments`.`id` = :id');
+        $appointment->bindValue(':id', $this->id, PDO::PARAM_INT);
+        if ($appointment->execute()) {
+            $result = $appointment->fetchAll(PDO::FETCH_OBJ);
+        }
+        return $result;
     }
 
     public function __destruct() {

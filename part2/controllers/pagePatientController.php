@@ -4,8 +4,11 @@ $formError = [];
 $modifyChecked = null;
 
 $patient = new Patients();
+$appointment = new Appointments();
+
 if(isset($_GET['id'])){
     $patient->id = $_GET['id'];
+    $appointment->id = $_GET['id'];
 }
 
 $lastname = &$patient->lastname;
@@ -106,3 +109,4 @@ if (isset($_POST['modifyPatient'])) {
     }
 }
 $onePatient = $patient->getOnePatient();
+$appointmentsList = $appointment->getAppointmentsForPatient();

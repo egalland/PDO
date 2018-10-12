@@ -26,6 +26,7 @@ include '../header.php';
             <th>Téléphone</th>
             <th>Email</th>
             <th>Modifier</th>
+            <th>Supprimer</th>
         </tr>
     </thead>
     <tbody>
@@ -37,7 +38,8 @@ include '../header.php';
                 <td><?= $appointment->birthDate; ?></td>
                 <td><?= $appointment->phone; ?></td>
                 <td><?= $appointment->mail; ?></td>
-                <td><a href="rdv/<?= $appointment->id; ?>.html">Modifier le rendez-vous</td>
+                <td><a href="rdv/<?= $appointment->id; ?>.html">Modifier</td>
+                <td><a href="?del=<?= $appointment->id; ?>">Supprimer</a></td>
             </tr>
         <?php } ?>
     </tbody>

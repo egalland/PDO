@@ -25,7 +25,9 @@ class Appointments extends Database {
         $checkAppointment->bindValue(':dateHour', $this->dateHour, PDO::PARAM_STR);
         $checkAppointment->bindValue(':idPatients', $this->idPatients, PDO::PARAM_INT);
         if ($checkAppointment->execute()) {
-            $result = $checkAppointment->fetch(PDO::FETCH_OBJ);
+            if (is_object($checkAppointment)) {
+                $result = $checkAppointment->fetch(PDO::FETCH_OBJ);
+            }
         }
         return $result;
     }
@@ -62,11 +64,27 @@ class Appointments extends Database {
     }
 
     public function modifyAppointment() {
-        $patient = $this->_db_->prepare('UPDATE `appointments` SET `dateHour` = :dateHour, `idPatients` = :idPatients WHERE `id` = :id');
-        $patient->bindValue(':id', $this->id, PDO::PARAM_INT);
-        $patient->bindValue(':dateHour', $this->dateHour, PDO::PARAM_STR);
-        $patient->bindValue(':idPatients', $this->idPatients, PDO::PARAM_INT);
+        $appointment = $this->_db_->prepare('UPDATE `appointments` SET `dateHour` = :dateHour, `idPatients` = :idPatients WHERE `id` = :id');
+        $appointment->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $appointment->bindValue(':dateHour', $this->dateHour, PDO::PARAM_STR);
+        $appointment->bindValue(':idPatients', $this->idPatients, PDO::PARAM_INT);
         return $patient->execute();
+    }
+    
+    public function getAppointmentsForPatient() {
+        $result = array();
+        $appointment = $this->_db_->prepare('SELECT DATE_FORMAT(`appointments`.`dateHour`, "%d/%m/%Y %H:%i") as `dateHour` FROM `appointments` INNER JOIN `patients` ON `appointments`.`idPatients` = `patients`.`id` WHERE `appointments`.`id` = :id');
+        $appointment->bindValue(':id', $this->id, PDO::PARAM_INT);
+        if ($appointment->execute()) {
+            $result = $appointment->fetchAll(PDO::FETCH_OBJ);
+        }
+        return $result;
+    }
+
+    public function deleteAppointment(){
+        $appointment = $this->_db_->prepare('DELETE FROM `appointments` WHERE `id` = :id');
+        $appointment->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $appointment->execute();
     }
 
     public function __destruct() {

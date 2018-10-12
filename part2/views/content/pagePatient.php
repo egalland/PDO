@@ -2,6 +2,8 @@
 /* * ****************************IMPORT***************************************** */
 //model patients
 require '../../models/patients.php';
+//model appointments
+require '../../models/appointments.php';
 //regex
 require '../../controllers/regex.php';
 // Controlleur de la page
@@ -75,6 +77,20 @@ include '../header.php';
         <input type="submit" name="modifyPatient" class="col btn btn-dark" id="modifyPatient" value="Modifier le patient" disabled="disabled" />
     </div>
 </form>
+<table class="table table-striped table-dark">
+    <thead>
+        <tr>
+            <th>Date du rendez-vous</th>
+        </tr>
+    </thead>
+    <tbody>
+<?php foreach ($appointmentsList as $appointmentDetail) { ?>
+            <tr>
+                <td><?= $appointmentDetail->dateHour; ?></td>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>
 <a href="../liste-patients.php" class="col-md-2 btn btn-dark">Retour à la liste</a>
 <script src="../../../assets/js/modifyPatient.js"></script>
 <?php
