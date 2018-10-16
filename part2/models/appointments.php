@@ -73,8 +73,8 @@ class Appointments extends Database {
     
     public function getAppointmentsForPatient() {
         $result = array();
-        $appointment = $this->_db_->prepare('SELECT DATE_FORMAT(`appointments`.`dateHour`, "%d/%m/%Y %H:%i") as `dateHour` FROM `appointments` INNER JOIN `patients` ON `appointments`.`idPatients` = `patients`.`id` WHERE `appointments`.`id` = :id');
-        $appointment->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $appointment = $this->_db_->prepare('SELECT DATE_FORMAT(`appointments`.`dateHour`, "%d/%m/%Y %H:%i") as `dateHour` FROM `appointments` WHERE `idPatients` = :idPatients');
+        $appointment->bindValue(':idPatients', $this->idPatients, PDO::PARAM_INT);
         if ($appointment->execute()) {
             $result = $appointment->fetchAll(PDO::FETCH_OBJ);
         }
@@ -88,6 +88,6 @@ class Appointments extends Database {
     }
 
     public function __destruct() {
-        $this->_db_ = NULL;
+        parent::__destruct();
     }
 }

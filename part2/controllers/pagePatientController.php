@@ -8,7 +8,7 @@ $appointment = new Appointments();
 
 if(isset($_GET['id'])){
     $patient->id = $_GET['id'];
-    $appointment->id = $_GET['id'];
+    $appointment->idPatients = $_GET['id'];
 }
 
 $lastname = &$patient->lastname;

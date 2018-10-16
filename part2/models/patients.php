@@ -80,6 +80,24 @@ class Patients extends Database {
         return $result;
     }
 
+    public function deletePatientWithAppointments() {
+        $patient = $this->_db_->prepare('DELETE FROM `patients` WHERE `id` = :id');
+        $patient->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $patient->execute();
+     }
+
+     public function searchPatient(){
+        $result = array();
+        $patient = $this->_db_->prepare('SELECT `id`, `lastname`, `firstname`, DATE_FORMAT(`birthDate`, "%d/%m/%Y") as `birthDate`, `phone`, `mail` FROM `patients` WHERE `lastname` LIKE :search OR `firstname` LIKE :search');
+        $patient->bindValue(':search', '%' . $this->search . '%', PDO::PARAM_STR);
+        if($patient->execute()){
+            if (is_object($patient)) {
+                $result = $patient->fetchAll(PDO::FETCH_OBJ);
+            }
+        }
+        return $result;
+    }
+
     public function __destruct() {
         $this->_db_ = NULL;
     }

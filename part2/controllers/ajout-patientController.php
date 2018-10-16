@@ -118,7 +118,7 @@ if (isset($_POST['submitPatient'])) {
     
     if (sizeof($formError) == 0) {
         $testPatient = $patient->checkIfPatientExist();
-        if (count($testPatient) < 1) {
+        if ($testPatient->count == 0) {
             $addPatient = $patient->addPatient();
             if ($addPatient == true) {
                 $form[0]['value'] = null;

@@ -80,15 +80,15 @@ include '../header.php';
 <table class="table table-striped table-dark">
     <thead>
         <tr>
-            <th>Date du rendez-vous</th>
+            <th>Date rendez-vous</th>
         </tr>
     </thead>
     <tbody>
-<?php foreach ($appointmentsList as $appointmentDetail) { ?>
-            <tr>
-                <td><?= $appointmentDetail->dateHour; ?></td>
-            </tr>
-        <?php } ?>
+    <?php foreach ($appointmentsList as $appointmentDetail) { ?>
+        <tr>
+            <td><?= $appointmentDetail->dateHour; ?></td>
+        </tr>
+    <?php } ?>
     </tbody>
 </table>
 <a href="../liste-patients.php" class="col-md-2 btn btn-dark">Retour à la liste</a>

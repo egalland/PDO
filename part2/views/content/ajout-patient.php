@@ -15,7 +15,6 @@ include '../header.php';
 /* * *************************************************************************** */
 ?>
 <?php if ($addPatient == true) { ?><p>Le patient a bien été créé</p><?php } ?>
-<?php if ((count($testPatient) >= 1) && !empty($_POST['submitPatient']) && sizeof($formError) == 0) { ?><p class="alert alert-danger bg-danger">Le patient existe déjà</p><?php } ?>
 <?php if (($addPatient == false) && !empty($_POST['submitPatient']) && sizeof($formError) == 0) { ?><p class="alert alert-danger bg-danger">Il a eu un problème, veuillez réessayer plus tard</p><?php } ?>
 <form class="pt-4" action="ajout-patient.php" method="POST">
     <?php foreach ($form as $formNumber) { ?>

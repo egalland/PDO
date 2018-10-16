@@ -30,4 +30,9 @@ CREATE TABLE IF NOT EXISTS `appointments`(
         PRIMARY KEY (`id`)
 )ENGINE=InnoDB;
 
-ALTER TABLE `appointments` ADD CONSTRAINT FK_appointments_id_patients FOREIGN KEY (`idPatients`) REFERENCES `patients`(`id`);
+ALTER TABLE `hospitalE2N`.`appointments` 
+ADD CONSTRAINT `FK_appointments_id_patients`
+  FOREIGN KEY (`idPatients`)
+  REFERENCES `hospitalE2N`.`patients` (`id`)
+  ON DELETE CASCADE
+ON UPDATE NO ACTION;

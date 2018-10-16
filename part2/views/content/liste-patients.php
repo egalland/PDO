@@ -14,7 +14,11 @@ $pageTitle = 2;
 include '../header.php';
 /* * *************************************************************************** */
 ?>
-<table class="table table-striped table-dark">
+<form method="GET" action="liste-patients.php">
+    <input type="text" name="search" />
+    <input type="submit" value="Rechercher" />
+</form>
+<table class="table table-striped table-dark mt-4">
     <thead>
         <tr>
             <th>Nom</th>
@@ -22,6 +26,8 @@ include '../header.php';
             <th>Date de Naissance</th>
             <th>Téléphone</th>
             <th>Email</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
         </tr>
     </thead>
     <tbody>
@@ -33,6 +39,7 @@ include '../header.php';
                 <td><?= $patient->phone; ?></td>
                 <td><?= $patient->mail; ?></td>
                 <td><a href="profil/<?= $patient->id; ?>.html">Voir la fiche du patient</a></td>
+                <td><a href="?del=<?= $patient->id; ?>">Supprimer</a></td>
             </tr>
         <?php } ?>
     </tbody>
