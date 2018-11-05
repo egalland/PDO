@@ -42,9 +42,13 @@ class Patients extends Database {
 
     public function getPatients() {
         $result = array();
-        $patient = $this->_db_->query('SELECT `id`, `lastname`, `firstname`, DATE_FORMAT(`birthDate`, "%d/%m/%Y") as `birthDate`, `phone`, `mail` FROM `patients`');
-        if (is_object($patient)) {
-            $result = $patient->fetchAll(PDO::FETCH_OBJ);
+        $patient = $this->_db_->prepare('SELECT `id`, `lastname`, `firstname`, DATE_FORMAT(`birthDate`, "%d/%m/%Y") as `birthDate`, `phone`, `mail` FROM `patients` LIMIT :page, :limit');
+        $patient->bindValue(':page', $this->page, PDO::PARAM_INT);
+        $patient->bindValue(':limit', $this->limit, PDO::PARAM_INT);
+        if($patient->execute()){
+            if (is_object($patient)) {
+                $result = $patient->fetchAll(PDO::FETCH_OBJ);
+            }
         }
         return $result;
     }
@@ -86,7 +90,7 @@ class Patients extends Database {
         return $patient->execute();
      }
 
-     public function searchPatient(){
+    public function searchPatient(){
         $result = array();
         $patient = $this->_db_->prepare('SELECT `id`, `lastname`, `firstname`, DATE_FORMAT(`birthDate`, "%d/%m/%Y") as `birthDate`, `phone`, `mail` FROM `patients` WHERE `lastname` LIKE :search OR `firstname` LIKE :search');
         $patient->bindValue(':search', '%' . $this->search . '%', PDO::PARAM_STR);
